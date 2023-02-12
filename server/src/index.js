@@ -28,13 +28,9 @@ app.use('/management', managementRoutes);
 app.use('/sales', salesRoutes);
 
 mongoose.set('strictQuery', false);
-mongoose
-  .connect(
-    'mongodb+srv://jfernando12:contrasena@admin-dashboard.etrbtlv.mongodb.net/?retryWrites=true&w=majority'
-  )
-  .then((db) => {
-    console.log('DB Connected: ', db.connection.host);
-    app.listen(PORT, () => {
-      console.log('Server on port: ', PORT);
-    });
+mongoose.connect(process.env.MONGO_URI).then((db) => {
+  console.log('DB Connected: ', db.connection.host);
+  app.listen(PORT, () => {
+    console.log('Server on port: ', PORT);
   });
+});
