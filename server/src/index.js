@@ -11,6 +11,9 @@ import generalRoutes from './routes/generalRoutes.js';
 import managementRoutes from './routes/managementRoutes.js';
 import salesRoutes from './routes/salesRoutes.js';
 
+import User from './models/User.js';
+import { dataUser } from '../data/index.js';
+
 const app = express();
 const PORT = process.env.PORT;
 
@@ -30,7 +33,12 @@ app.use('/sales', salesRoutes);
 mongoose.set('strictQuery', false);
 mongoose.connect(process.env.MONGO_URI).then((db) => {
   console.log('DB Connected: ', db.connection.host);
-  app.listen(PORT, () => {
-    console.log('Server on port: ', PORT);
-  });
+  app.listen(PORT, () => console.log('Server on port: ', PORT));
+  /* ONLY ADD DATA ONE TIME */
+  // AffiliateStat.insertMany(dataAffiliateStat);
+  // OverallStat.insertMany(dataOverallStat);
+  // Product.insertMany(dataProduct);
+  // ProductStat.insertMany(dataProductStat);
+  // Transaction.insertMany(dataTransaction);
+  // User.insertMany(dataUser);
 });
