@@ -14,7 +14,13 @@ import salesRoutes from './routes/salesRoutes.js';
 import User from './models/User.js';
 import Product from './models/Product.js';
 import ProductStat from './models/ProductStat.js';
-import { dataUser, dataProduct, dataProductStat } from '../data/index.js';
+import Transaction from './models/Transaction.js';
+import {
+  dataUser,
+  dataProduct,
+  dataProductStat,
+  dataTransaction,
+} from '../data/index.js';
 
 const app = express();
 const PORT = process.env.PORT;
