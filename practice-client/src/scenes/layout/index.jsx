@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar';
@@ -6,10 +6,14 @@ import Navbar from '../../components/Navbar';
 
 const Layout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const isNonMobile = useMediaQuery('(min-width:600px)');
+  console.log('isNonMobile', isNonMobile);
 
   return (
     <Box display={'flex'} width="100%" height="100%">
       <Sidebar
+        user={ {} }
+        isNonMobile={isNonMobile}
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
         drawerWidth="250px"

@@ -1,5 +1,8 @@
-import { useTheme, Box, Drawer } from '@mui/material';
+import { useTheme, Box, Drawer, Typography, IconButton } from '@mui/material';
 import React from 'react';
+
+import FlexBetween from './FlexBetween';
+import { ChevronLeft } from '@mui/icons-material';
 
 const Sidebar = ({
   user,
@@ -27,7 +30,24 @@ const Sidebar = ({
           },
         }}
       >
-        Holis
+        <Box width="100%">
+          <Box m="1.5rem 2rem 2rem 3rem">
+            <FlexBetween>
+              <Box>
+                <Typography variant="h4" fontWeight="bold">
+                  Ecommerce
+                </Typography>
+              </Box>
+              <Box>
+                {!isNonMobile && (
+                  <IconButton>
+                    <ChevronLeft />
+                  </IconButton>
+                )}
+              </Box>
+            </FlexBetween>
+          </Box>
+        </Box>
       </Drawer>
     </Box>
   );
