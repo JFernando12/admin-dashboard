@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 import Layout from './scenes/layout';
 import Products from './scenes/products';
+import Dashboard from './scenes/dashboard';
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -18,7 +19,9 @@ function App() {
           <CssBaseline />
           <Routes>
             <Route element={<Layout />}>
-              <Route path="/" element={<Products />} />
+              <Route path="/" element={<Dashboard />}></Route>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/products" element={<Products />} />
             </Route>
           </Routes>
         </ThemeProvider>
