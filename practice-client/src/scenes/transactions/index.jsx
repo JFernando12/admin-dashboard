@@ -3,6 +3,7 @@ import { Box, useTheme } from '@mui/material';
 import Header from '../../components/Header';
 import { DataGrid } from '@mui/x-data-grid';
 import { useGetTransactionsQuery } from '../../store';
+import DataGridCustomToolbar from '../../components/DataGridCustomToolbar';
 
 const columns = [
   {
@@ -36,12 +37,13 @@ const columns = [
 ];
 
 const Transactions = () => {
+  const theme = useTheme();
+
   const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(20);
+  const [pageSize, setPageSize] = useState(10);
   const [sort, setSort] = useState({});
   const [search, setSearch] = useState('');
-
-  const theme = useTheme();
+  const [searchInput, setSearchInput] = useState('');
 
   const { data, isLoading } = useGetTransactionsQuery({
     page,
@@ -88,6 +90,22 @@ const Transactions = () => {
           getRowId={(row) => row._id}
           columns={columns}
           rows={(data && data.transactions) || []}
+          rowCount={(data && data.total) || 0}
+          rowsPerPageOptions={[10, 20, 100]}
+          pagination
+          page={page}
+          pageSize={pageSize}
+          paginationMode="server"
+          sortingMode="server"
+          onPageChange={(newPage) => setPage(newPage)}
+          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+          onSortModelChange={(newSortMode) => {
+            setSort(...newSortMode);
+          }}
+          components={{ Toolbar: DataGridCustomToolbar }}
+          componentsProps={{
+            toolbar: { searchInput, setSearchInput, setSearch },
+          }}
         />
       </Box>
     </Box>
